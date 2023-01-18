@@ -33,7 +33,7 @@ export const Products = (props) => {
                     :
                     <>
                         <div className='arrowBack'>
-                            <Link to="/"><img src={arrowBack} alt="back" /> Back to Best Seller</Link>
+                            <Link to="/store"><img src={arrowBack} alt="back" /> Back to Best Seller</Link>
                         </div>
                         <div className="product">
                             <img src={product.image} alt="" />
