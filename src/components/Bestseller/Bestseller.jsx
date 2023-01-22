@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
 
-export const BestSellers = () => {
+export const BestSellers = (props) => {
 
     const [cardInfo, setCardInfo] = useState([]);
     const navigate = useNavigate();
@@ -21,7 +21,7 @@ export const BestSellers = () => {
     }, [])
 
     let products = cardInfo
-        .map((el) => <div className="card" key={el.id}>
+        .map((el) => <div className="card router" key={el.id}>
             <img src={el.image} alt="image" />
             <h4>{el.title}</h4>
             <p className="price">${el.price}</p>

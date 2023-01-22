@@ -7,9 +7,49 @@
 
 /* Шапка сайта */
 .header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  max-width: 1308px;
+  margin: 0 auto;
+
   display: flex;
   justify-content: space-between;
-  padding: 25px 0;
+  padding: 15px 0;
+  background: rgb(249, 249, 255);
+  background: linear-gradient(0deg, rgba(249, 249, 255, 0.6758053563222164) 0%,
+      rgba(255, 255, 255, 1) 34%,
+      rgba(255, 255, 255, 1) 100%);
+}
+
+.router{
+  margin-top: 80px;
+}
+
+.cart {
+  position: relative;
+  cursor: pointer;
+}
+
+.cartNumber {
+  position: absolute;
+  top: -20%;
+  right: -30%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0.35rem;
+  height: 0.5rem;
+
+  line-height: 1.5;
+  border-radius: 50%;
+  background: rgb(154, 10, 10);
+
+  color: white;
+
 }
 
 
@@ -106,6 +146,9 @@
   margin-bottom: 62px;
 }
 
+.product button {
+  cursor: pointer;
+}
 
 .product img {
   width: 60%;
