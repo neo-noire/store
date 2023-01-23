@@ -1,6 +1,6 @@
 import '../../../App.css';
 import axios from 'axios';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useLayoutEffect } from 'react';
 import rating from '../../../assets/img/rating.svg'
 import cartWhite from '../../../assets/img/cartWhite.svg'
 import { useParams, Link } from 'react-router-dom';
@@ -19,6 +19,7 @@ export const Products = () => {
     const [isProductInCart, setProductInCart] = useState(false);
     let { productId } = useParams();
 
+    //fn assignment
     const serverReq = () => {
         axios.get(`https://masterclass.kimitsu.it-incubator.ru/api/products/${productId}`)
             .then((resolve) => {
@@ -31,16 +32,6 @@ export const Products = () => {
             })
     }
 
-    const fn = () => {
-        const indeRes = cartUpdate.findIndex(el => el._id === product._id);
-        if (indeRes === -1) return setProductInCart(false)
-    }
-
-
-    useEffect(() => {
-        serverReq()
-    }, [])
-
     const cartHandler = () => {
         setProductInCart(true);
         const productToCart = {
@@ -51,6 +42,7 @@ export const Products = () => {
             image: product.image,
             category: product.category,
             ordered: 1,
+            inCart: true,
         };
         dispatch(add(productToCart))
         alert(`${product.title} успешно добавлен в корзину`)
@@ -59,25 +51,33 @@ export const Products = () => {
     const openCart = () => {
         dispatch(cartModal())
     }
-    // const element = () => {
-    //     const indeRes = cartUpdate.findIndex(el => el._id === product._id);
-    //     if (indeRes != -1) return setProductInCart(true)
-    // }
+
     /// This fn helps element() avoid first render, 
     //due to product fills up only after render
     // and not to have null in product._id
-    function useDidUpdateEffect(fn, inputs) {
+    function useDidUpdateEffect(inputs) {
         const didMountRef = useRef(false);
 
         useEffect(() => {
             if (didMountRef.current) {
-                return fn();
+                const index = cartUpdate.findIndex((item) => item._id === product._id);
+                if (index === -1) return setProductInCart(false)
             }
             didMountRef.current = true;
         }, inputs);
     }
 
-     useDidUpdateEffect(fn, cartUpdate)
+    //fn use
+    useEffect(() => {
+        serverReq()
+    }, [])
+
+
+    // useLayoutEffect(() => {
+    //     const index = cartUpdate.findIndex((item) => item._id === product._id);
+    //     if (index === -1) return setProductInCart(false) 
+    // }, [cartUpdate])
+    // useDidUpdateEffect(cartUpdate)
 
     return (
         <div className='router'>

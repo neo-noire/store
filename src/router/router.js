@@ -14,6 +14,7 @@ export const router = createBrowserRouter([
     {
         path: "product/:productId",
         element: <Products />,
+        errorElement: <ErrorPage />,
     },
     {
 
