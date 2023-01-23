@@ -34,58 +34,59 @@ export const Modal = () => {
         setItemsInCart(cartItems.reduce((acc, curr) => acc + curr.ordered, 0))
     }, [cartItems])
 
-console.log(('rerender all'));
+    console.log(('rerender all'));
 
-const itemsToBuy = cartItems.map((e) => {
+    const itemsToBuy = cartItems.map((e) => {
 
-    return <div className={styles.cartItems}>
-        <div className={styles.imageBox}>
-            <img src={e.image} />
-        </div>
-        <div className={styles.about}>
-            <h2 className={styles.title}>
-                {e.title}
-            </h2>
-            <span className={styles.subtitle}>{e.category}</span>
-        </div>
-        <div className={styles.counter}>
-            <div className={styles.btn}
-                onClick={() => { plusToCart(e.id) }}
-            >+</div>
-            <div className={styles.count}>{e.ordered}</div>
-            <div className={styles.btn}
-                onClick={() => { minusCart(e.id) }}
-            >-</div>
-        </div>
-        <div className={styles.price}>
-            <div className={styles.amount}>${e.price}</div>
-            <div className={styles.remove}
-                onClick={() => { removeItem(e.id) }}
-            ><u>Remove</u></div>
-        </div>
+        return <div className={styles.cartItems}>
+            <div className={styles.imageBox}>
+                <img src={e.image} />
+            </div>
+            <div className={styles.about}>
+                <h2 className={styles.title}>
+                    {e.title}
+                </h2>
+                <span className={styles.subtitle}>{e.category}</span>
+            </div>
+            <div className={styles.counter}>
+                <div className={styles.btn}
+                    onClick={() => { plusToCart(e.id) }}
+                >+</div>
+                <div className={styles.count}>{e.ordered}</div>
+                <div className={styles.btn}
+                    onClick={() => { minusCart(e.id) }}
+                >-</div>
+            </div>
+            <div className={styles.price}>
+                <div className={styles.amount}>${e.price}</div>
+                <div className={styles.remove}
+                    onClick={() => { removeItem(e.id) }}
+                ><u>Remove</u></div>
+            </div>
 
-    </div>
-})
+        </div>
+    })
 
-return (
-    <>
-        <div className={styles.darkBG}
-            onClick={() => dispatch(cartModal())} />
-        <div className={styles.centered}>
-            <div className={styles.modal}>
-                <div className={styles.modalHeader}>
-                    <h5 className={styles.heading}>Cart</h5>
-                </div>
-                <button className={styles.closeBtn}
-                    onClick={() => dispatch(cartModal())}>
-                    Close Btn
-                </button>
-                <div className={styles.modalContent}>
-                    {
-                        cartItems.length > 0
-                            ? itemsToBuy
-                            : 'There is nothing in the cart'
-                    }
+    return (
+        <>
+            <div className={styles.darkBG}
+                onClick={() => dispatch(cartModal())} />
+            <div className={styles.centered}>
+                <div className={styles.modal}>
+                    <div className={styles.modalHeader}>
+                        <h5 className={styles.heading}>Cart</h5>
+                    </div>
+                    <button className={styles.closeBtn}
+                        onClick={() => dispatch(cartModal())}>
+                        Close Btn
+                    </button>
+                    <div className={styles.modalContent}>
+                        {
+                            cartItems.length > 0
+                                ? itemsToBuy
+                                : 'There is nothing in the cart'
+                        }
+                    </div>
                     {
                         cartItems.length > 0
                             ? <div className={styles.checkout}>
@@ -100,9 +101,9 @@ return (
                             </div> : null
                     }
 
+
                 </div>
             </div>
-        </div>
-    </>
-)
+        </>
+    )
 };
