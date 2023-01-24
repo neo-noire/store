@@ -10,7 +10,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { add, cartModal } from '../../../redux/counterCart';
 
 
-export const Products = () => {
+export const Products = (props) => {
 
     const cartUpdate = useSelector((state) => state.addToCart.items);
     const dispatch = useDispatch();
@@ -25,7 +25,7 @@ export const Products = () => {
             .then((resolve) => {
                 setProductInfo(resolve.data);
                 const indeRes = cartUpdate.findIndex(el => el._id === resolve.data._id);
-                if (indeRes != -1) return setProductInCart(true)
+                if (indeRes !== -1) return setProductInCart(true)
             })
             .catch((error) => {
                 console.log(error);
@@ -52,7 +52,7 @@ export const Products = () => {
         dispatch(cartModal())
     }
 
-    /// This fn helps element() avoid first render, 
+    /// This fn helps useEffect() avoid first render, 
     //due to product fills up only after render
     // and not to have null in product._id
     function useDidUpdateEffect(inputs) {
@@ -64,7 +64,7 @@ export const Products = () => {
                 if (index === -1) return setProductInCart(false)
             }
             didMountRef.current = true;
-        }, inputs);
+        }, [inputs]);
     }
 
     //fn use
@@ -72,12 +72,7 @@ export const Products = () => {
         serverReq()
     }, [])
 
-
-    // useLayoutEffect(() => {
-    //     const index = cartUpdate.findIndex((item) => item._id === product._id);
-    //     if (index === -1) return setProductInCart(false) 
-    // }, [cartUpdate])
-    // useDidUpdateEffect(cartUpdate)
+    useDidUpdateEffect(cartUpdate)
 
     return (
         <div className='router'>

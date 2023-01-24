@@ -15,6 +15,8 @@ const App = () => {
     document.body.style.overflow = 'hidden' 
     : document.body.style.overflow = 'auto'
   }, [modalState])
+
+  
   return (
     <div className="appContainer">
       <Header />
